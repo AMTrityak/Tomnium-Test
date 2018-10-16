@@ -1,24 +1,24 @@
 import api from '../../api/api'
 
-export const FETCH_REQUEST = 'FETCH_REQUEST';
-export const FETCH_SUCCESS = 'FETCH_SUCCESS';
-export const FETCH_FAILURE = 'FETCH_FAILURE';
+export const FETCH_PRODUCTS_REQUEST = 'FETCH_PRODUCTS_REQUEST';
+export const FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS';
+export const FETCH_PRODUCTS_FAILURE = 'FETCH_PRODUCTS_FAILURE';
 
 const initialState = {
 };
 
 export function products(state = initialState, action = {}) {
     switch(action.type) {
-        case FETCH_REQUEST:
+        case FETCH_PRODUCTS_REQUEST:
             return {
                 ...state,
             };
-        case FETCH_SUCCESS:
+        case FETCH_PRODUCTS_SUCCESS:
             return {
                 ...state,
                 products: action.items,
             };
-        case FETCH_FAILURE:
+        case FETCH_PRODUCTS_FAILURE:
             return {
                 ...state,
                 err: action.err,
@@ -29,16 +29,16 @@ export function products(state = initialState, action = {}) {
 }
 
 const fetchProductsRequest = () => ({
-    type: FETCH_REQUEST
+    type: FETCH_PRODUCTS_REQUEST
 });
 
 const fetchProductsSuccess = ({ data }) => ({
-    type: FETCH_SUCCESS,
+    type: FETCH_PRODUCTS_SUCCESS,
     items: data
 });
 
 const fetchProductsFailure = (err) => ({
-    type: FETCH_FAILURE,
+    type: FETCH_PRODUCTS_FAILURE,
     err
 });
 

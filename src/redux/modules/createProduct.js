@@ -1,8 +1,8 @@
 import api from "../../api/api";
 
-const POST_CREATE_REQUEST = 'POST_CREATE_REQUEST';
-const POST_CREATE_SUCCESS = 'POST_CREATE_SUCCESS';
-const POST_CREATE_FAILURE = 'POST_CREATE_FAILURE';
+const CREATE_PRODUCT_REQUEST = 'CREATE_PRODUCT_REQUEST';
+const CREATE_PRODUCT_SUCCESS = 'CREATE_PRODUCT_SUCCESS';
+const CREATE_PRODUCT_FAILURE = 'CREATE_PRODUCT_FAILURE';
 const URL_CREATE_PRODUCT = '/product/new';
 
 const initialState = {
@@ -12,17 +12,17 @@ const initialState = {
 
 export const createProduct = (state = initialState, action) => {
     switch(action.type) {
-        case POST_CREATE_REQUEST:
+        case CREATE_PRODUCT_REQUEST:
             return {
                 ...state,
                 err: false
             };
-        case POST_CREATE_SUCCESS:
+        case CREATE_PRODUCT_SUCCESS:
             return {
                 ...state,
                 data: action.data || state.data,
             };
-        case POST_CREATE_FAILURE:
+        case CREATE_PRODUCT_FAILURE:
             return {
                 ...state,
                 err: action.err,
@@ -34,28 +34,28 @@ export const createProduct = (state = initialState, action) => {
 
 
 
-const postCreateRequest = () => ({
-    type: POST_CREATE_REQUEST
+const createProductRequest = () => ({
+    type: CREATE_PRODUCT_REQUEST
 });
 
-const postCreateSuccess = ({data}) => ({
-    type: POST_CREATE_SUCCESS,
+const createProductSuccess = ({data}) => ({
+    type: CREATE_PRODUCT_SUCCESS,
     ...data,
 });
 
-const postCreateFailure = (err) => ({
-    type: POST_CREATE_FAILURE,
+const createProductFailure = (err) => ({
+    type: CREATE_PRODUCT_FAILURE,
     err
 });
 
 export const postCreateProduct = ({name, price, description, createdBy}) => (dispatch) => {
-    dispatch(postCreateRequest());
+    dispatch(createProductRequest());
     api.instance.post(`${URL_CREATE_PRODUCT}`,{name: name, price: price, description: description, createdBy: createdBy})
         .then((res) =>{
-            dispatch(postCreateSuccess(res));
+            dispatch(createProductSuccess(res));
         })
         .catch((error)=> {
-            dispatch(postCreateFailure(error))
+            dispatch(createProductFailure(error))
         })
 
 };

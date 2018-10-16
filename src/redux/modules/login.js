@@ -35,29 +35,29 @@ export const login = (state = initialState, action) => {
 };
 
 
-const postLoginTokenRequest = () => ({
+const loginTokenRequest = () => ({
     type: POST_LOGIN_TOKEN_REQUEST
 });
 
-export const postLoginTokenSuccess = ({data}) => ({
+export const loginTokenSuccess = ({data}) => ({
     type: POST_LOGIN_TOKEN_SUCCESS,
     token: data,
 });
 
-const postLoginTokenFailure = (err) => ({
+const loginTokenFailure = (err) => ({
     type: POST_LOGIN_TOKEN_FAILURE,
     err
 });
 
 
 export const postLogin = ({ username, password }) => (dispatch) => {
-    dispatch(postLoginTokenRequest());
+    dispatch(loginTokenRequest());
     api.instance.post(`${URL_TOKEN}`,{username: username, password: password})
         .then((res) =>{
-            dispatch(postLoginTokenSuccess(res));
+            dispatch(loginTokenSuccess(res));
         })
         .catch((error)=> {
-            dispatch(postLoginTokenFailure(error))
+            dispatch(loginTokenFailure(error))
         })
 
 };

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {postLoginTokenSuccess} from '../../redux/modules/login';
+import {loginTokenSuccess} from '../../redux/modules/login';
 
 
 const mapStateToProps = store => {
@@ -14,7 +14,7 @@ class CheckToken extends Component {
     componentWillMount() {
        if(localStorage.getItem('auth')){
            const data = localStorage.getItem('auth');
-           this.props.postLoginTokenSuccess({data})
+           this.props.loginTokenSuccess({data})
        }
     }
     render() {
@@ -37,4 +37,4 @@ class CheckToken extends Component {
     }
 }
 
-export default connect(mapStateToProps, {postLoginTokenSuccess})(CheckToken);
+export default connect(mapStateToProps, {loginTokenSuccess})(CheckToken);
