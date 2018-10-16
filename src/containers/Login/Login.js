@@ -18,17 +18,12 @@ class Login extends Component {
         password: '',
     };
 
-    handleChangeUsername = (e) => {
+    handleInputChange = (key, e) => {
         this.setState({
-            username: e.target.value
+            [key]: e.target.value
         })
     };
 
-    handleChangePassword = (e) => {
-        this.setState({
-            password: e.target.value
-        })
-    };
     handleClick = (e) => {
         e.preventDefault();
         const username = this.state.username;
@@ -47,14 +42,14 @@ class Login extends Component {
                                 <h1>Login</h1>
                                 <input
                                     type="text"
-                                    onChange={this.handleChangeUsername}
+                                    onChange={(e)=>this.handleInputChange('username', e)}
                                     placeholder='Your name'
                                 />
                             </div>
                             <div>
                                 <input
                                     type="password"
-                                    onChange={this.handleChangePassword}
+                                    onChange={(e)=>this.handleInputChange('password', e)}
                                     placeholder='Your password'
                                 />
                             </div>

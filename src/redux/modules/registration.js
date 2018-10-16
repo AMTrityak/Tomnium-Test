@@ -4,6 +4,7 @@ const POST_REGISTER_REQUEST = 'POST_REGISTER_REQUEST';
 const POST_REGISTER_SUCCESS = 'POST_REGISTER_SUCCESS';
 const POST_REGISTER_FAILURE = 'POST_REGISTER_FAILURE';
 const REGISTERED = 'REGISTERED';
+const URL_REGISTRATION = '/user';
 
 
 const initialState = {
@@ -46,7 +47,7 @@ const postRegistrationRequest = () => ({
 
 const postRegistrationSuccess = ({data}) => ({
     type: POST_REGISTER_SUCCESS,
-    ...data,
+    data: data,
 });
 
 const postRegistrationFailure = (data) => ({
@@ -60,19 +61,12 @@ export const registered = () => ({
 
 export const postRegistration = ({ username, password }) => (dispatch) => {
     dispatch(postRegistrationRequest());
-
-    return api.postRegistration({ username, password })
-        .then(res => {
-            if(res.status === 201) {
-                dispatch(registered());
-                dispatch(postRegistrationSuccess(res));
-            }
-            else{
-                dispatch(postRegistrationFailure(res.data))
-            }
+    api.instance.post(`${URL_REGISTRATION}`,{username: username, password: password})
+        .then((res) =>{
+            dispatch(registered());
+            dispatch(postRegistrationSuccess(res));
         })
-        .catch(err => {
-            console.log(err)
+        .catch((error)=> {
+            dispatch(postRegistrationFailure(error))
         })
-
 };

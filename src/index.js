@@ -9,7 +9,7 @@ import AllProducts from './containers/AllProducts/AllProducts';
 import ProductById from './containers/ProductById/ProductById';
 import CreateProduct from './containers/CreateProduct/CreateProduct';
 import Login from './containers/Login/Login';
-import Main from './containers/Main/Main';
+import Main from './component/Main/Main';
 
 ReactDOM.render(
     <Provider store={store}>

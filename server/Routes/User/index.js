@@ -4,6 +4,5 @@ const handler = require('./handler');
 const validation = require('./validation');
 
 router.post('/user', validation.validationRegistr(), handler.userRegistration);
-router.get('/user', handler.checkUser);
 
 module.exports = router;

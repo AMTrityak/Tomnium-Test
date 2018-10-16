@@ -3,16 +3,13 @@ const Product = require('../../Models/productModel');
 exports.postProduct = (req, res) => {
     let product = req.body;
     Product.create(product)
-        .then((product) => {
-            console.log('saved user', product);
+        .then(() => {
             res.sendStatus(201)
         })
         .catch((err) => {
             console.log('err',err);
             res.sendStatus(500)
         })
-
-
 };
 
 exports.getProductsById = (req, res) => {

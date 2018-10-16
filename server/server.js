@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const port = config.port;
-const db_url = process.env.MONGODB_URL || process.env.MONGOLAB_URI || 'mongodb://localhost/8080';
+const db_url = 'mongodb://localhost/8080';
 
 mongoose.connect(db_url, function(){
     console.log('MongoDB connected successfully')

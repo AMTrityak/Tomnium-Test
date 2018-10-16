@@ -9,12 +9,12 @@ class Main extends Component {
         return (
             <div className="main-wrapper">
                 <div className='registr-wrapper'>
-                <div className='sign-up'>
-                    <Link to={'/registration'}>Sign Up</Link>
-                </div>
-                <div className='sign-in'>
-                    <Link to={'/login'}>Sign in</Link>
-                </div>
+                    <div className='sign-up'>
+                        <Link to={'/registration'}>Sign Up</Link>
+                    </div>
+                    <div className='sign-in'>
+                        <Link to={'/login'}>Sign in</Link>
+                    </div>
                 </div>
                 <div className='products'>
                     <Link to={'/products'}>All Products</Link>

@@ -3,6 +3,7 @@ import api from "../../api/api";
 const POST_CREATE_REQUEST = 'POST_CREATE_REQUEST';
 const POST_CREATE_SUCCESS = 'POST_CREATE_SUCCESS';
 const POST_CREATE_FAILURE = 'POST_CREATE_FAILURE';
+const URL_CREATE_PRODUCT = '/product/new';
 
 const initialState = {
     err: false,
@@ -47,21 +48,14 @@ const postCreateFailure = (err) => ({
     err
 });
 
-
-export const postCreateProduct = ({ name, price, description, createdBy }) => (dispatch) => {
+export const postCreateProduct = ({name, price, description, createdBy}) => (dispatch) => {
     dispatch(postCreateRequest());
-
-    return api.postCreateProduct({ name, price, description, createdBy })
-        .then(res => {
-            if(res.status === 201) {
-                dispatch(postCreateSuccess(res));
-            }
-            else{
-                dispatch(postCreateFailure(true))
-            }
+    api.instance.post(`${URL_CREATE_PRODUCT}`,{name: name, price: price, description: description, createdBy: createdBy})
+        .then((res) =>{
+            dispatch(postCreateSuccess(res));
         })
-        .catch(err => {
-            console.log(err)
+        .catch((error)=> {
+            dispatch(postCreateFailure(error))
         })
 
 };

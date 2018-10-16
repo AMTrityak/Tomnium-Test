@@ -3,15 +3,13 @@ import api from '../../api/api';
 const POST_LOGIN_TOKEN_REQUEST = 'POST_LOGIN_TOKEN_REQUEST';
 const POST_LOGIN_TOKEN_SUCCESS = 'POST_LOGIN_TOKEN_SUCCESS';
 const POST_LOGIN_TOKEN_FAILURE = 'POST_LOGIN_TOKEN_FAILURE';
+const URL_TOKEN = '/login';
 
 const initialState = {
     err: false,
     isAuth: false,
-    data: {
-
-    }
+    data: {}
 };
-
 
 export const login = (state = initialState, action) => {
     switch(action.type) {
@@ -41,7 +39,7 @@ const postLoginTokenRequest = () => ({
     type: POST_LOGIN_TOKEN_REQUEST
 });
 
-const postLoginTokenSuccess = ({data}) => ({
+export const postLoginTokenSuccess = ({data}) => ({
     type: POST_LOGIN_TOKEN_SUCCESS,
     token: data,
 });
@@ -54,18 +52,12 @@ const postLoginTokenFailure = (err) => ({
 
 export const postLogin = ({ username, password }) => (dispatch) => {
     dispatch(postLoginTokenRequest());
-    return api.loginToken({ username, password })
-        .then(res => {
-            console.log(res);
-            if(res.status === 200) {
-                dispatch(postLoginTokenSuccess(res));
-            }
-            else{
-                dispatch(postLoginTokenFailure(true))
-            }
+    api.instance.post(`${URL_TOKEN}`,{username: username, password: password})
+        .then((res) =>{
+            dispatch(postLoginTokenSuccess(res));
         })
-        .catch(err => {
-            console.log(err)
+        .catch((error)=> {
+            dispatch(postLoginTokenFailure(error))
         })
 
 };

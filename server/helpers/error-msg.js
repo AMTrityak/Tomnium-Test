@@ -7,5 +7,6 @@ module.exports = {
     MissingPrice: 'Price is missing',
     MissingDescription: 'Description is missing',
     MissingCreateBy: 'Create by is missing',
-    UserAlreadyExist: 'User is already exist'
+    UserAlreadyExist: 'User is already exist',
+    MissingUsername: 'Username is missing'
 };
