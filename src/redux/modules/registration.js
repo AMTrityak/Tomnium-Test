@@ -64,8 +64,8 @@ export const postRegistration = ({ username, password }) => (dispatch) => {
     api.instance.post(`${URL_REGISTRATION}`,{username: username, password: password})
         .then((res) =>{
             if(res.status === 201) {
-                dispatch(registered());
                 dispatch(postRegistrationSuccess(res));
+                dispatch(registered());
             }
             else{
                 dispatch(postRegistrationFailure(res.data))
