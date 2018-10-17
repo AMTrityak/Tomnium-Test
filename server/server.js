@@ -7,7 +7,6 @@ const user = require('./Routes/User/index');
 const login = require('./Routes/Login/index');
 const product = require('./Routes/Product/index');
 
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const port = config.port;

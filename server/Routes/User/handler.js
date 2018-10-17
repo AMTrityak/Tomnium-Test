@@ -3,7 +3,7 @@ const User = require('../../Models/userModel');
 
 
 exports.userRegistration = (req, res) => {
-    let user = User();
+    let user = new User;
     user.username = req.body.username;
     let password = req.body.password;
 
@@ -15,14 +15,19 @@ exports.userRegistration = (req, res) => {
         else {
             user.password = hash;
             User.findOne({username: user.username})
-            .then((user) => {
-                if(user) {
+            .then((findUser) => {
+                if(findUser) {
                     return res.send('User already exist')
+                }else{
+                    user.save()
+                    .then(() => {
+                        res.sendStatus(201)
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        res.sendStatus(500)
+                    })
                 }
-            });
-            user.save()
-            .then(() => {
-                res.sendStatus(201)
             })
             .catch((err) => {
                 console.log('err',err);

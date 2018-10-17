@@ -50,7 +50,7 @@ const createProductFailure = (err) => ({
 
 export const postCreateProduct = ({name, price, description, createdBy}) => (dispatch) => {
     dispatch(createProductRequest());
-    api.instance.post(`${URL_CREATE_PRODUCT}`,{name: name, price: price, description: description, createdBy: createdBy})
+    api.instance.post(`${URL_CREATE_PRODUCT}`,{name, price, description, createdBy})
         .then((res) =>{
             dispatch(createProductSuccess(res));
         })
